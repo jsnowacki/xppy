@@ -73,19 +73,41 @@ class Output:
         return self.__desc
      
     def __getitem__(self, name):
+        # TODO Maybe do it more efficiently 
+        # Sequence value
         if type(name) is tuple:
             if type(name[1]) is str:
+                print 'string'
                 j = self.__desc[name[1]] 
+            elif type(name[1]) is list:
+                print 'tuple'
+                j = []
+                for n in name[1]:
+                    if type(n) is int:
+                        j.append(n)
+                    elif type(n) is str:
+                        j.append(self.__desc[n])                      
             else:
+                print 'else'
                 j = name[1]
             i = name[0]
+            print i,j
             return self.__raw_data[i,j]
-                 
+        # Single value         
         elif type(name) is str:
             j = self.__desc[name]
             return self.__raw_data[:,j]
         elif type(name) is int:
             return self.__raw_data[:,name]
+        elif type(name) is list:
+                j = []
+                for n in name:
+                    if type(n) is int:
+                        j.append(n)
+                    elif type(n) is str:
+                        j.append(self.__desc[n])
+                return self.__raw_data[:,j]
+        
         else:
             raise IndexError('Index does not exist!')
         

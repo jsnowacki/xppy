@@ -165,3 +165,37 @@ def findADP(data, cols=[0,1], threshold=1.7, sampleThr=3):
                 break
             sl_last = sl
     return adp
+
+def ISI(data, cols=[0,1], threshold=1.7, sampleThr=3):
+    '''
+    Function calculates ISI from given data and return in the form of an array
+    of ISI for the given pair. The ISI is calculated for the peak of the spikes.
+    '''
+    
+    (spb, spm, spe) = findSpikes(data, cols, threshold, sampleThr)
+    
+    # ISI can be calculated for at least 2 spikes
+    if len(spm) < 2:
+        return None
+    
+    return np.diff(data[spm,cols[0]])
+
+def getDVDT(data, cols=[0,1]):
+    '''
+    Function calculated dV/dt over given data.
+    '''
+
+    return np.diff(data[:,cols[1]])/np.diff(data[:,cols[0]])
+
+def getThreshold(data, cols=[0,1]):
+    ''' 
+    Function returns a threshold time and value for the first spike in the spike train.
+    Threshold is defined as dV/dt crossing of 10 mV/ms.
+    '''
+    dv = getDVDT(data, cols)
+    
+    i = (dv >= 10).nonzero()[0][0]
+    
+    return data[i,:]
+                                            
+    
