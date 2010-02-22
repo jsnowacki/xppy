@@ -197,5 +197,17 @@ def getThreshold(data, cols=[0,1]):
     i = (dv >= 10).nonzero()[0][0]
     
     return data[i,:]
-                                            
+
+def getTau(data, cols=[0,1]):
+    '''
+    Function gets time constant from hyperpolarizing current injection data.
+    Time constant is defined as a crossing of 63% of the maximal amplitude
+    of the trajectory. Note that t0 is the beginning of the current injection,
+    function does not detect the beginning of current injection by itself.
+    '''
     
+    v_63  = 0.63*data[cols[1]].max()
+    
+    # Index of the 63% crossing 
+    i_63 = (data[:,cols[1]] >= v_63).nonzero()[0][0]
+    return data[i_63,cols[1]] - data[0,cols[1]]
