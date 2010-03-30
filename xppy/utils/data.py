@@ -205,9 +205,9 @@ def getTau(data, cols=[0,1]):
     of the trajectory. Note that t0 is the beginning of the current injection,
     function does not detect the beginning of current injection by itself.
     '''
-    
-    v_63  = 0.63*data[cols[1]].max()
-    
+    d = np.abs(data[:,cols].copy())
+    v_63  = 0.63*(d[:,cols[1]].max() - d[:,cols[1]].min()) + d[0,cols[1]]    
+
     # Index of the 63% crossing 
-    i_63 = (data[:,cols[1]] >= v_63).nonzero()[0][0]
-    return data[i_63,cols[1]] - data[0,cols[1]]
+    i_63 = (d[:,cols[1]] >= v_63).nonzero()[0][0]
+    return d[i_63,cols[1]] - d[0,cols[1]]

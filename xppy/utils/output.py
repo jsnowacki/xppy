@@ -77,10 +77,8 @@ class Output:
         # Sequence value
         if type(name) is tuple:
             if type(name[1]) is str:
-                print 'string'
                 j = self.__desc[name[1]] 
             elif type(name[1]) is list:
-                print 'tuple'
                 j = []
                 for n in name[1]:
                     if type(n) is int:
@@ -88,10 +86,8 @@ class Output:
                     elif type(n) is str:
                         j.append(self.__desc[n])                      
             else:
-                print 'else'
                 j = name[1]
             i = name[0]
-            print i,j
             return self.__raw_data[i,j]
         # Single value         
         elif type(name) is str:
