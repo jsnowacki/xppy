@@ -45,7 +45,7 @@ def changeOde(new_pars, ode_file=tmp_ode):
     lines = f.readlines()
     f.close()
     
-    for line in lines[:]:
+    for line in list(lines):
         # Check the type of the current line
         if line.find('par') == 0 or line.find('p ') == 0:
             tp = 'par'
@@ -58,11 +58,13 @@ def changeOde(new_pars, ode_file=tmp_ode):
             continue
         
         # Go through the parameter array    
-        for p in pars: 
+        for p in list(pars): 
             # Check only if the type of parameter matches the type of the line
             if p[0] == tp:
+                print p, line
                 i = line.find(p[1]+'=') # Find exact name followed by =
                 if i == -1: # Parameter doesn't exist
+                    print 'Does not exist: ', p
                     continue
                 t1 = line[:i+len(p[1])+1] # Read string up to =
                 t2 = line[i+len(p[1])+1:] # Read string after =
@@ -91,7 +93,7 @@ def readOdePars(ode_file=tmp_ode, read_par=True, read_init=True, read_opt=True):
     f.close()
     
     pars = []
-    for line in lines[:]:
+    for line in list(lines):
         # Check the type of the current line
         if read_par and (line.find('par') == 0 or line.find('p ') == 0):
             type = 'par'
@@ -125,7 +127,7 @@ def readOdeVars(ode_file=tmp_ode):
     f.close()
     
     desc = [['time', 0], ['t', 0], [0, 'time']]; i = 1
-    for line in lines[:]:
+    for line in list(lines):
         # Check the type of the current line
         # skip comments
         if line.find('#') == 0:
@@ -176,7 +178,7 @@ def changeSet(new_pars, set_file=tmp_set):
     f.close()
     
     tp = None
-    for line in lines[:]: 
+    for line in list(lines): 
         # Check the type of the current line
         if line.find('# Parameters') == 0 and tp !='par':
             tp = 'par'
@@ -193,7 +195,7 @@ def changeSet(new_pars, set_file=tmp_set):
             continue     
         
         # Go through the parameter array    
-        for p in pars: 
+        for p in list(pars): 
             # Check only if the type of parameter matches the type of the line
             if p[0] == tp:
                 i = line.find(p[1]+os.linesep) # Find exact name
@@ -227,7 +229,7 @@ def readSetPars(set_file=tmp_set, read_par=True, read_init=True):
     f.close()
     
     tp = None; pars = []
-    for line in lines[:]: 
+    for line in list(lines): 
         # Check the type of the current line
         if read_par and line.find('# Parameters') == 0 and tp !='par':
             tp = 'par'
