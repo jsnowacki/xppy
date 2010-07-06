@@ -84,11 +84,12 @@ def resample1d(data, ns):
     new_data[-1,:] = data[-1,:] # First and last points sould be the same
     return new_data
 
-def findSpikes(data, cols=[0,1], threshold=1.7, sampleThr=3):
+def findSpikes(data, cols=[0,1], threshold=20, sampleThr=3):
     '''
-    Function finds spiks in the given two data columns data. 
+    Function finds spikes in the given two data columns data. 
     Threshold is a slope of the tangent line. SampleThr is 
     minimal number of samples where slope is greater then threshold.
+    Threshold value according to (Naundorf et al. 2006).
     '''
     if len(cols) != 2:
         raise ValueError('List should contain to columns!')
@@ -136,7 +137,7 @@ def findSpikes(data, cols=[0,1], threshold=1.7, sampleThr=3):
             st += 1
             # If we passed sample threshold, we have begining of a spike
             if st >= sampleThr and sl > 0:
-                spb.append(i-1)
+                spb.append(i-st)
                 spf = 1
         else:
             st = 0
@@ -144,10 +145,11 @@ def findSpikes(data, cols=[0,1], threshold=1.7, sampleThr=3):
 
     return (spb,spm,spe)
 
-def findADP(data, cols=[0,1], threshold=1.7, sampleThr=3):
+def findADP(data, cols=[0,1], threshold=20, sampleThr=3):
     '''
     Function finds ADP in data in given columns. Threshold and sample threshold,
     are parameters for findSpikes.
+    Threshold value according to (Naundorf et al. 2006).
     '''
     (spb, spm, spe) = findSpikes(data, cols, threshold, sampleThr)
     adp = []
@@ -177,10 +179,11 @@ def findADP(data, cols=[0,1], threshold=1.7, sampleThr=3):
             sl_last = sl
     return adp
 
-def ISI(data, cols=[0,1], threshold=1.7, sampleThr=3):
+def ISI(data, cols=[0,1], threshold=20, sampleThr=3):
     '''
     Function calculates ISI from given data and return in the form of an array
     of ISI for the given pair. The ISI is calculated for the peak of the spikes.
+    Threshold value according to (Naundorf et al. 2006).
     '''
     
     (spb, spm, spe) = findSpikes(data, cols, threshold, sampleThr)
@@ -201,11 +204,11 @@ def getDVDT(data, cols=[0,1]):
 def getThreshold(data, cols=[0,1]):
     ''' 
     Function returns a threshold time and value for the first spike in the spike train.
-    Threshold is defined as dV/dt crossing of 10 mV/ms.
+    Threshold is defined as dV/dt crossing of 20 V/s (Naundorf et al. 2006).
     '''
     dv = getDVDT(data, cols)
     
-    i = (dv >= 10).nonzero()[0][0]
+    i = (dv >= 20).nonzero()[0][0]
     
     return data[i,:]
 
