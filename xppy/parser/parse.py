@@ -61,10 +61,8 @@ def changeOde(new_pars, ode_file=tmp_ode):
         for p in list(pars): 
             # Check only if the type of parameter matches the type of the line
             if p[0] == tp:
-                print p, line
                 i = line.find(p[1]+'=') # Find exact name followed by =
                 if i == -1: # Parameter doesn't exist
-                    print 'Does not exist: ', p
                     continue
                 t1 = line[:i+len(p[1])+1] # Read string up to =
                 t2 = line[i+len(p[1])+1:] # Read string after =
