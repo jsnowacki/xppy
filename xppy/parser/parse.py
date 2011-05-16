@@ -175,7 +175,13 @@ def changeSet(new_pars, set_file=tmp_set):
     lines = f.readlines()
     f.close()
     
+    # Check type
     tp = None
+    # Check line separator for the file
+    if lines[0][-2:] == '\r\n':
+        linesep = '\r\n' # Windows
+    else:
+        linesep = '\n' # *nix
     for line in list(lines): 
         # Check the type of the current line
         if line.find('# Parameters') == 0 and tp !='par':
@@ -196,7 +202,7 @@ def changeSet(new_pars, set_file=tmp_set):
         for p in list(pars): 
             # Check only if the type of parameter matches the type of the line
             if p[0] == tp:
-                i = line.find(p[1]+os.linesep) # Find exact name
+                i = line.find(p[1]+linesep) # Find exact name
                 if i == -1: # May be upper case?
                     tmp = p[1].upper()
                     i = line.find(tmp)
@@ -204,8 +210,8 @@ def changeSet(new_pars, set_file=tmp_set):
                         continue
                     p[1] = tmp
                 # Adding the new line
-                lines[lines.index(line)] = str(p[2])+'  '+p[1]+os.linesep   
-                line = str(p[2])+'  '+p[1]+os.linesep  
+                lines[lines.index(line)] = str(p[2])+'  '+p[1]+linesep   
+                line = str(p[2])+'  '+p[1]+linesep  
                 pars.pop(pars.index(p)) # Delete the changed parameter
     
     # Write file with new lines                    
