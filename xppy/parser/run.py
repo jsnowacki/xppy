@@ -35,7 +35,7 @@ def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
     c = 'xppaut '+ode_file+' -silent'
     if os.path.exists(set_file):
         c = c+' -setfile '+set_file
-    # Moves the xppaut output messages to trash (posix systems only)
+    # By default XPP stdio is not displayed
     if not verbose:
         if os.name in ['posix','mac']:
             c = c+' > /dev/null'

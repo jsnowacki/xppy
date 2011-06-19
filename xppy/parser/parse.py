@@ -125,6 +125,7 @@ def readOdeVars(ode_file=tmp_ode):
     f.close()
     
     desc = [['time', 0], ['t', 0], [0, 'time']]; i = 1
+    # First read equations
     for line in list(lines):
         # Check the type of the current line
         # skip comments
@@ -141,6 +142,14 @@ def readOdeVars(ode_file=tmp_ode):
         elif line.find('(t+1)') > 0:
             n = line[0:line.find('(t+1)')]
             desc.append([n,i]); desc.append([i,n]); i += 1
+        else:
+            continue
+    # Auxiliary vars are later in data file, so need second run
+    for line in list(lines):
+        # Check the type of the current line
+        # skip comments
+        if line.find('#') == 0:
+            continue
         # Auxiliary vars
         elif line.find('a') == 0:
             n = line[line.find(' ')+1:].split('=')[0].strip()
