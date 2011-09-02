@@ -1,9 +1,9 @@
 XPPy is a Python interface for Bard Ermentrout's XPP. XPPy was inspired by a 
-similar XPP-Matlab interface by Rob Clawley. 
+similar XPP-Matlab interface by Rob Clewley. 
 
 The main feature is ability to parse and change XPP's ode and set files, and 
 run a simulation using XPP. The package contains some data wrapping classes 
-that aid working with the data files produced by XPP (timetraces, allinfo and 
+that aid working with data files produced by XPP (timetraces, allinfo and 
 bifurcation files files). In addition, it contains additional plotting tools 
 for matplotlib. 
 
@@ -70,3 +70,19 @@ Before you start using XPPy make sure that path to XPP is present in your PATH
 variable. Easy way to check that is to type xppaut in the terminal window 
 anywhere outside the XPP directory, that should open XPP window. If you have 
 some problems with XPP itself, please refer to XPP documentation.
+
+#####################
+# HOW TO CITE XPPY? #
+#####################
+If you want to refer to XPPy in a publication, you can use 
+
+"Nowacki J. XPPy. 2011. Available at: http://seis.bris.ac.uk/~enxjn/xppy/."
+
+or BibTeX:
+
+@misc{xppy, 
+      author = {Nowacki, Jakub}, 
+      title = {{XPPy}}, 
+      url = {http://seis.bris.ac.uk/~enxjn/xppy/}, 
+      year = {2011} 
+}
