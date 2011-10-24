@@ -151,7 +151,7 @@ def readOdeVars(ode_file=tmp_ode):
         if line.find('#') == 0:
             continue
         # Auxiliary vars
-        elif line.find('a') == 0:
+        elif line.find('aux') == 0 or line.find('a ') == 0:
             n = line[line.find(' ')+1:].split('=')[0].strip()
             desc.append([n,i]); desc.append([i,n]); i += 1
         else:
