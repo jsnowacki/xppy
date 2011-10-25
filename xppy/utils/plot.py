@@ -73,9 +73,12 @@ class Surf:
 def plotDiag(file_name, axes = None, tr_file='', tr_cols=[],
              xlabel='', ylabel='', img_dir='', img_ext='png'):
 
-    print 'Plotting',file_name
-    pl.figure()
-    pl.hold('true')
+    #print 'Plotting',file_name
+    if not axes:
+        f = pl.figure()
+        ax = f.add_subplot(111)
+    else:
+        ax = axes
     # read the data file for second (right) fpo continuation
     ai = allinfo.AllInfo(file_name)
     bl = ai.getBranches()
@@ -88,30 +91,33 @@ def plotDiag(file_name, axes = None, tr_file='', tr_cols=[],
         # plot all parts
         for i in range(0,len(p)):
             if i == len(p)-1:
-                pl.plot(b[p[i]:-1,2],b[p[i]:-1,5],c[int(b[p[i],0])])
+                ax.plot(b[p[i]:,2],b[p[i]:,5],c[int(b[p[i],0])])
                 # if the branch is periodic orbit, plot low value as well
-                if b[p[i],1] < 0:
-                    pl.plot(b[p[i]:-1,2],b[p[i]:-1,5+ai.noVar],
+                if int(b[p[i],0]) in [3,4]:
+                    ax.plot(b[p[i]:,2],b[p[i]:,5+ai.noVar],
                             c[int(b[p[i],0])])
             else:
-                pl.plot(b[p[i]:p[i+1],2],b[p[i]:p[i+1],5],c[int(b[p[i],0])])
+                ax.plot(b[p[i]:p[i+1],2],b[p[i]:p[i+1],5],c[int(b[p[i],0])])
                 # if the branch is periodic orbit, plot low value as well
-                if b[p[i],1] < 0:
-                    pl.plot(b[p[i]:p[i+1],2],b[p[i]:p[i+1],5+ai.noVar],
+                #if b[p[i],1] < 0:
+                if int(b[p[i],0]) in [3,4]:
+                    ax.plot(b[p[i]:p[i+1],2],b[p[i]:p[i+1],5+ai.noVar],
                             c[int(b[p[i],0])])
     del ai
     # Adding trajectory to the picture
     if len(tr_file) > 0 and len(tr_cols) == 2:
         tr = np.loadtxt(tr_file)
-        pl.plot(tr[:,tr_cols[0]], tr[:,tr_cols[1]], 'g-')
+        ax.plot(tr[:,tr_cols[0]], tr[:,tr_cols[1]], 'g-')
     # Some additional info
-    pl.xlabel(xlabel); pl.ylabel(ylabel)
-    pl.title(file_name)
-    # Save figure
-    fn = file_name.split('/')[-1]
-    fn = fn.split('.')[0]+'.'+img_ext
-    fn = img_dir+fn
-    pl.savefig(fn,dpi=200)
+    ax.set_xlabel(xlabel); ax.set_ylabel(ylabel)
+    # if axes were passed don't save as we do not know the fig
+    if not axes:
+        ax.set_title(file_name)
+        # Save figure
+        fn = file_name.split('/')[-1]
+        fn = fn.split('.')[0]+'.'+img_ext
+        fn = img_dir+fn
+        f.savefig(fn,dpi=200)
 
 def plotLC(data, cols=[0,1], axes=None, colormap=None):
     '''
