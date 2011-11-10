@@ -16,4 +16,4 @@ along with XPPy.  If not, see <http://www.gnu.org/licenses/>.
 '''
 from xppy.parser import *
 __all__ = ['parser', 'utils']
-__version__ = '0.6.6'
+__version__ = '0.7.0'
