@@ -1,7 +1,3 @@
-For this fork, there is an added method xppy.set_cmd('PATH_TO_XPP') because in some situations, setting the path to the XPP executable might not be as easy as setting your PATH environment variable. See 'xppyDemo.py' for an example.
-
-##################
-
 XPPy is a Python interface for Bard Ermentrout's XPP. XPPy was inspired by a 
 similar XPP-Matlab interface by Rob Clewley. 
 
