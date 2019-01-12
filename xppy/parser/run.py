@@ -34,6 +34,13 @@ from xppy.utils.output import Output
 tmp_name = '__tmp__'
 tmp_ode  = tmp_name+'.ode'
 tmp_set  = tmp_name+'.set'
+c_g = 'xppaut'
+
+def set_cmd(xpp_path):
+    global c_g
+    c_g = os.path.join(xpp_path, c_g)
+    print "XPP Path set: %s" % (c_g,)
+    return c_g
 
 def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
     ''' 
@@ -44,7 +51,7 @@ def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
     if not os.path.exists(ode_file):
         raise IOError('No such file or directory: '+ode_file)
 
-    c = 'xppaut '+ode_file+' -silent'
+    c = str(c_g) + ' '+ode_file+' -silent'
     if os.path.exists(set_file):
         c = c+' -setfile '+set_file
     # By default XPP stdio is not displayed
