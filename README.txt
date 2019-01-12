@@ -1,3 +1,5 @@
+[UNMAINTAINED] The library is no logner maintained by me as I don't work in the area anymore. Please see the forks for newer, maintened versions.
+
 XPPy is a Python interface for Bard Ermentrout's XPP. XPPy was inspired by a 
 similar XPP-Matlab interface by Rob Clewley. 
 
