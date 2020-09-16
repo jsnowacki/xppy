@@ -25,5 +25,6 @@ setup(name='xppy',
       license='LGPL',
       url='http://seis.bris.ac.uk/~enxjn/xppy',
       platforms='All-platforms',
-      packages=['xppy','xppy.parser','xppy.utils']
+      packages=['xppy','xppy.parser','xppy.utils'],
+      install_requires=['numpy', 'matplotlib'],
       )
