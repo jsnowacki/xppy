@@ -26,6 +26,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
+from __future__ import print_function
+from __future__ import absolute_import
 import os
 import numpy as np
 
@@ -38,7 +40,7 @@ def change_ode(ode_file=tmp_ode, new_pars=[]):
     Function changes the parameters and initial conditions specified in
     new_pars in given ode_file. 
     '''
-    print 'Warning! Function is obsolete, use changeOde instead!'
+    print('Warning! Function is obsolete, use changeOde instead!')
     changeOde(new_pars, ode_file)
 
 def changeOde(new_pars, ode_file=tmp_ode):
@@ -177,7 +179,7 @@ def change_set(set_file, new_pars):
     Function changes the parameters and initial conditions specified in
     new_pars in given ode_file. 
     '''
-    print 'Warning! Function is obsolete, use changeSet instead!'
+    print('Warning! Function is obsolete, use changeSet instead!')
     changeSet(new_pars, set_file)
    
 def changeSet(new_pars, set_file=tmp_set):

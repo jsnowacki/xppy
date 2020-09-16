@@ -26,6 +26,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
+from __future__ import print_function
+from __future__ import absolute_import
+
 import os
 import shutil
 from xppy.parser import parse
@@ -39,7 +42,7 @@ c_g = 'xppaut'
 def set_cmd(xpp_path):
     global c_g
     c_g = os.path.join(xpp_path, c_g)
-    print "XPP Path set: %s" % (c_g,)
+    print("XPP Path set: %s" % (c_g,))
     return c_g
 
 def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
@@ -94,7 +97,7 @@ def createTmp(ode_file=None, set_file=None):
     if set_file != None:
         shutil.copy(set_file, tmp_set)
     if ode_file == None and set_file == None:
-        print 'Warning! No files where created, both ode and set arguments are None.'
+        print('Warning! No files where created, both ode and set arguments are None.')
 
 def deleteTmp(del_ode=True, del_set=True):
     '''
