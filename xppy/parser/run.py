@@ -39,7 +39,7 @@ c_g = 'xppaut'
 def set_cmd(xpp_path):
     global c_g
     c_g = os.path.join(xpp_path, c_g)
-    print "XPP Path set: %s" % (c_g,)
+    print("XPP Path set: %s" % (c_g,))
     return c_g
 
 def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
@@ -94,7 +94,7 @@ def createTmp(ode_file=None, set_file=None):
     if set_file != None:
         shutil.copy(set_file, tmp_set)
     if ode_file == None and set_file == None:
-        print 'Warning! No files where created, both ode and set arguments are None.'
+        print('Warning! No files where created, both ode and set arguments are None.')
 
 def deleteTmp(del_ode=True, del_set=True):
     '''

@@ -38,7 +38,7 @@ def change_ode(ode_file=tmp_ode, new_pars=[]):
     Function changes the parameters and initial conditions specified in
     new_pars in given ode_file. 
     '''
-    print 'Warning! Function is obsolete, use changeOde instead!'
+    print('Warning! Function is obsolete, use changeOde instead!')
     changeOde(new_pars, ode_file)
 
 def changeOde(new_pars, ode_file=tmp_ode):
@@ -177,7 +177,7 @@ def change_set(set_file, new_pars):
     Function changes the parameters and initial conditions specified in
     new_pars in given ode_file. 
     '''
-    print 'Warning! Function is obsolete, use changeSet instead!'
+    print('Warning! Function is obsolete, use changeSet instead!')
     changeSet(new_pars, set_file)
    
 def changeSet(new_pars, set_file=tmp_set):
